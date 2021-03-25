@@ -21,16 +21,15 @@ var randomPoem;
     //mit Math.random wird eine zufällige Zahl entsprechend der Länge der Arrays ausgewählt
     //Math.floor schneidet die Nachkommastellen der gewählten Zahl ab
     //mit splice wird das Wort aus dem Array entfernt
+    //die 1 bei splice gibt die Anzahl an zu entfernende Elemente an
+    //mit [0] wird die 0. Stelle des Arrays entfernt
     //return all: Variable wird geleert und der Vorgang wird erneut ausgeführt
     function getVerse(_subject, _predicate, _object) {
         let all = "";
         let randomSubject = Math.floor(Math.random() * _subject.length);
         let randomPredicate = Math.floor(Math.random() * _predicate.length);
         let randomObject = Math.floor(Math.random() * _object.length);
-        all = subject[randomSubject] + " " + predicate[randomPredicate] + " " + object[randomObject];
-        _subject.splice(randomSubject, 1); // 1 beduetet 1. Stelle
-        _predicate.splice(randomPredicate, 1);
-        _object.splice(randomObject, 1);
+        all = _subject.splice(randomSubject, 1)[0] + " " + _predicate.splice(randomPredicate, 1)[0] + " " + _object.splice(randomObject, 1)[0];
         return all;
     }
 })(randomPoem || (randomPoem = {}));
