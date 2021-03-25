@@ -28,7 +28,7 @@ var randomPoem;
         let randomPredicate = Math.floor(Math.random() * _predicate.length);
         let randomObject = Math.floor(Math.random() * _object.length);
         all = subject[randomSubject] + " " + predicate[randomPredicate] + " " + object[randomObject];
-        _subject.splice(randomSubject, 1);
+        _subject.splice(randomSubject, 1); // 1 beduetet 1. Stelle
         _predicate.splice(randomPredicate, 1);
         _object.splice(randomObject, 1);
         return all;
