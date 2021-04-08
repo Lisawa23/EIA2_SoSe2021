@@ -1,0 +1,9 @@
+body {
+	font-family: arial;
+	font-size: small;
+	background: rgb(196, 174, 189);
+    }
+button {
+    border-radius: 10%;
+    background-color: #f766b6;
+}
