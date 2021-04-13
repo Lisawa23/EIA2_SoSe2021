@@ -1,9 +1,21 @@
 body {
 	font-family: arial;
 	font-size: small;
-	background: rgb(196, 174, 189);
+	background: #d8b28e;
     }
 button {
     border-radius: 10%;
-    background-color: #f766b6;
+    background-color: #b68053;
+}
+
+a{
+    color: #7e593b;
+}
+
+h2{
+    color: #463120;
+}
+
+h1{
+    color: #302924;
 }
