@@ -18,11 +18,9 @@ function handleLoad(_event: Event): void {
 
 function setInfoBox(_event: MouseEvent): void {
     let span: HTMLSpanElement = <HTMLSpanElement>document.querySelector("span");
-    let mousePosition: HTMLElement = <HTMLElement>_event.target;
-    mousePosition.appendChild(span);
 
-    let x: number = _event.offsetX;
-    let y: number = _event.offsetY;
+    let x: number = _event.pageX + 10;
+    let y: number = _event.pageY + 10;
 
     span.style.left = x + "px";
     span.style.top = y + "px";
@@ -32,9 +30,14 @@ function logInfo(_event: Event): void {
     console.log("Event type: " + _event.type);
     console.log("Target: " + _event.target);
     console.log("CurrentTarget = " + _event.currentTarget);
-    console.log("Event: " + _event);
-    console.groupEnd();
+    console.log(_event);
 }
 
+// let button: HTMLElement = <HTMLElement>document.querySelector("button");
+// button.addEventListener("click", bubbleFunction, true);
 
+// function bubbleFunction(_event: Event): void {
+//     let event: CustomEvent = new CustomEvent({bubbles: true});
+//     event.stopPropagation();
+// }
 }

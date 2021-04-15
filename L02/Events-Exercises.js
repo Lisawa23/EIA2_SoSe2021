@@ -18,10 +18,8 @@ var L02;
     }
     function setInfoBox(_event) {
         let span = document.querySelector("span");
-        let mousePosition = _event.target;
-        mousePosition.appendChild(span);
-        let x = _event.offsetX;
-        let y = _event.offsetY;
+        let x = _event.pageX + 10;
+        let y = _event.pageY + 10;
         span.style.left = x + "px";
         span.style.top = y + "px";
     }
@@ -29,8 +27,13 @@ var L02;
         console.log("Event type: " + _event.type);
         console.log("Target: " + _event.target);
         console.log("CurrentTarget = " + _event.currentTarget);
-        console.log("Event: " + _event);
-        console.groupEnd();
+        console.log(_event);
     }
+    // let button: HTMLElement = <HTMLElement>document.querySelector("button");
+    // button.addEventListener("click", bubbleFunction, true);
+    // function bubbleFunction(_event: Event): void {
+    //     let event: CustomEvent = new CustomEvent({bubbles: true});
+    //     event.stopPropagation();
+    // }
 })(L02 || (L02 = {}));
 //# sourceMappingURL=Events-Exercises.js.map
