@@ -7,6 +7,7 @@ var L02;
         let body = document.querySelector("body");
         let div0 = document.querySelector(".div0");
         let div1 = document.querySelector(".div1");
+        let button = document.querySelector("button");
         document.addEventListener("click", logInfo);
         document.addEventListener("keyup", logInfo);
         body.addEventListener("click", logInfo);
@@ -15,11 +16,13 @@ var L02;
         div0.addEventListener("keyup", logInfo);
         div1.addEventListener("click", logInfo);
         div1.addEventListener("keyup", logInfo);
+        document.addEventListener("riseup", buttonOutput);
+        button.addEventListener("click", bubbleFunction);
     }
     function setInfoBox(_event) {
         let span = document.querySelector("span");
-        let x = _event.pageX + 10;
-        let y = _event.pageY + 10;
+        let x = _event.pageX + 15;
+        let y = _event.pageY + 20;
         span.style.left = x + "px";
         span.style.top = y + "px";
     }
@@ -29,11 +32,12 @@ var L02;
         console.log("CurrentTarget = " + _event.currentTarget);
         console.log(_event);
     }
-    // let button: HTMLElement = <HTMLElement>document.querySelector("button");
-    // button.addEventListener("click", bubbleFunction, true);
-    // function bubbleFunction(_event: Event): void {
-    //     let event: CustomEvent = new CustomEvent({bubbles: true});
-    //     event.stopPropagation();
-    // }
+    let buttonCustomEvent = new CustomEvent("riseup", { detail: null });
+    function bubbleFunction(_event) {
+        document.dispatchEvent(buttonCustomEvent);
+    }
+    function buttonOutput(_event) {
+        console.log(_event);
+    }
 })(L02 || (L02 = {}));
 //# sourceMappingURL=Events-Exercises.js.map

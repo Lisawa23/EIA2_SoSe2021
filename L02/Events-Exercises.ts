@@ -6,6 +6,7 @@ function handleLoad(_event: Event): void {
     let body: HTMLElement = <HTMLElement>document.querySelector("body");
     let div0: HTMLDivElement = <HTMLDivElement>document.querySelector(".div0");
     let div1: HTMLDivElement = <HTMLDivElement>document.querySelector(".div1");
+    let button: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button");
     document.addEventListener("click", logInfo);
     document.addEventListener("keyup", logInfo);
     body.addEventListener("click", logInfo);
@@ -14,13 +15,15 @@ function handleLoad(_event: Event): void {
     div0.addEventListener("keyup", logInfo);
     div1.addEventListener("click", logInfo);
     div1.addEventListener("keyup", logInfo);
+    document.addEventListener("riseup", buttonOutput);
+    button.addEventListener("click", bubbleFunction);
 }
 
 function setInfoBox(_event: MouseEvent): void {
     let span: HTMLSpanElement = <HTMLSpanElement>document.querySelector("span");
 
-    let x: number = _event.pageX + 10;
-    let y: number = _event.pageY + 10;
+    let x: number = _event.pageX + 15;
+    let y: number = _event.pageY + 20;
 
     span.style.left = x + "px";
     span.style.top = y + "px";
@@ -33,11 +36,13 @@ function logInfo(_event: Event): void {
     console.log(_event);
 }
 
-// let button: HTMLElement = <HTMLElement>document.querySelector("button");
-// button.addEventListener("click", bubbleFunction, true);
+let buttonCustomEvent: CustomEvent = new CustomEvent("riseup", {detail: null});
 
-// function bubbleFunction(_event: Event): void {
-//     let event: CustomEvent = new CustomEvent({bubbles: true});
-//     event.stopPropagation();
-// }
+function bubbleFunction(_event: Event): void {
+    document.dispatchEvent(buttonCustomEvent);
+}
+
+function buttonOutput(_event: Event): void {
+    console.log(_event);
+}
 }
