@@ -1,0 +1,21 @@
+.front {
+    background-color: blue;
+    height: 30px;
+    width: 30px;
+}
+
+.back {
+    background-color: cyan;
+    height: 30px;
+    width: 30px;
+}
+
+.playGround {
+    height: 300px;
+    width: 300px;
+    background-color: brown;
+}
+
+.is-hidden {
+    display: none;
+}
