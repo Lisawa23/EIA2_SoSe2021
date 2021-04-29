@@ -1,4 +1,4 @@
-namespace L02memory {
+namespace L03NewMemory {
 
     window.addEventListener("load", handleLoad);
 
@@ -7,6 +7,7 @@ namespace L02memory {
     let playCardArray: HTMLElement [] = [];
     let choosenArray: HTMLElement [] = [];
     let hideCards: HTMLElement [] = [];
+    let inputNo: number = 0;
 
     function handleLoad(_event: Event): void { 
     let start: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button");
@@ -15,8 +16,14 @@ namespace L02memory {
 
     function createCards(_event: Event): void {  
     let formData: FormData = new FormData(document.forms[0]);
-    let inputString: FormDataEntryValue = <FormDataEntryValue>formData.get("Number");
-    let inputStringToNo: number = +inputString;
+    let inputString: FormDataEntryValue | null = formData.get("Number");
+    if (inputString) {
+        inputNo = Number(inputString);
+    }
+    else {
+        inputNo = 5;
+    }
+  
     let slider: FormDataEntryValue = <FormDataEntryValue>formData.get("Slider"); 
     let bColor: FormDataEntryValue = <FormDataEntryValue>formData.get("Color1");
     let cardBackColor: FormDataEntryValue = <FormDataEntryValue>formData.get("Color2");
@@ -26,7 +33,7 @@ namespace L02memory {
     div = <HTMLDivElement>document.querySelector(".form");
     div.innerHTML = "";
     div.style.backgroundColor = bColor.toString();
-    for (let i: number = 0; i < inputStringToNo; i++) {
+    for (let i: number = 0; i < inputNo; i++) {
         let card: HTMLElement = document.createElement("div");
         card.innerHTML = "<p>" + cardArray[i] + "</p>";
         card.style.width = slider + "px";
@@ -49,7 +56,7 @@ namespace L02memory {
         playCardArray.push(secCard);
         div.appendChild(secCard);
 
-        playCardArray.sort(() => 0.6 - Math.random());
+        playCardArray.sort(() => 0.5 - Math.random());
         div.appendChild(playCardArray[i]);
         timer(); 
 
@@ -110,7 +117,7 @@ namespace L02memory {
             timer();
             div.innerHTML = "";
             let congrat: HTMLElement = document.createElement("div");
-            congrat.innerHTML = "<p>Congratulation you won!</p><br><p>Time:" + timeCounter + "sec</p>";
+            congrat.innerHTML = "<br><br><br><p>Congratulation you won!</p><br><p>Time: " + timeCounter + " sec</p>";
             div.appendChild(congrat);
         }
     }
