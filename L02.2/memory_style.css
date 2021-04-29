@@ -16,11 +16,10 @@ h1 {
     float: left;
 }
 .open {
-    background-color: aqua;
+    background-color: #2d889d;
 }
 
 .is-hidden {
-    background-color: black;
 	cursor: pointer;
 }
 

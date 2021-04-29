@@ -3,57 +3,45 @@ var L02memory;
 (function (L02memory) {
     window.addEventListener("load", handleLoad);
     let div;
-    let cardArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"];
+    let cardArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y"];
     let playCardArray = [];
     let choosenArray = [];
     let hideCards = [];
     function handleLoad(_event) {
         let start = document.querySelector("button");
         start.addEventListener("click", createCards);
-        //Input Number from 5-25
-        // let number: HTMLInputElement = <HTMLInputElement>document.querySelector("#number");
-        // let inputString: string = number.value;
-        // let inputStringToNumber: number = +inputString;
-        // if (inputStringToNumber < 5 || inputStringToNumber > 25) {
-        //     handleLoad(_event);
-        // }
-        // else {
-        //     start.addEventListener("click", createCards);
-        // }
     }
     function createCards(_event) {
-        //Input Number from 5-25
-        let number = document.querySelector("#number");
-        let inputString = number.value;
-        let inputStringToNumber = +inputString;
-        //Input Slider
-        let slider = document.querySelector("#slider");
-        let sliderNumber = slider.value;
-        //Button für font funktioniert nicht
-        let radioButton = document.querySelector(".radio");
-        let font = radioButton.value;
-        let cardName = document.querySelector("p");
-        cardName.style.fontFamily = font;
-        //Playground background-color
-        let bColor = document.querySelector(".background");
-        let background = bColor.value;
-        console.log(background);
+        let formData = new FormData(document.forms[0]);
+        let inputString = formData.get("Number");
+        let inputStringToNo = +inputString;
+        let slider = formData.get("Slider");
+        let bColor = formData.get("Color1");
+        let cardBackColor = formData.get("Color2");
+        let fontColor = formData.get("Color3");
+        let fontFamily = formData.get("Radiogroup");
         div = document.querySelector(".form");
         div.innerHTML = "";
-        div.style.backgroundColor = background;
-        for (let i = 0; i < inputStringToNumber; i++) {
+        div.style.backgroundColor = bColor.toString();
+        for (let i = 0; i < inputStringToNo; i++) {
             let card = document.createElement("div");
             card.innerHTML = "<p>" + cardArray[i] + "</p>";
-            card.style.width = sliderNumber + "px";
-            card.style.height = sliderNumber + "px";
+            card.style.width = slider + "px";
+            card.style.height = slider + "px";
             card.setAttribute("class", "front is-hidden");
+            card.style.backgroundColor = cardBackColor.toString();
+            card.style.color = fontColor.toString();
+            card.style.fontFamily = fontFamily.toString();
             playCardArray.push(card);
             div.appendChild(card);
             let secCard = document.createElement("div");
             secCard.innerHTML = "<p>" + cardArray[i] + "</p>";
-            secCard.style.width = sliderNumber + "px";
-            secCard.style.height = sliderNumber + "px";
+            secCard.style.width = slider + "px";
+            secCard.style.height = slider + "px";
             secCard.setAttribute("class", "front is-hidden");
+            secCard.style.backgroundColor = cardBackColor.toString();
+            secCard.style.color = fontColor.toString();
+            secCard.style.fontFamily = fontFamily.toString();
             playCardArray.push(secCard);
             div.appendChild(secCard);
             card.addEventListener("click", function () {
@@ -83,7 +71,9 @@ var L02memory;
                 }
                 else {
                     choosenArray[0].classList.add("is-hidden");
+                    choosenArray[0].classList.remove("open");
                     choosenArray[1].classList.add("is-hidden");
+                    choosenArray[1].classList.remove("open");
                     choosenArray = [];
                 }
                 choosenArray = [];
