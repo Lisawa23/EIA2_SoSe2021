@@ -44,17 +44,24 @@ var L02memory;
             secCard.style.fontFamily = fontFamily.toString();
             playCardArray.push(secCard);
             div.appendChild(secCard);
+            playCardArray.sort(() => 0.6 - Math.random());
+            div.appendChild(playCardArray[i]);
+            timer();
             card.addEventListener("click", function () {
-                card.classList.remove("is-hidden");
-                card.classList.add("open");
-                choosenArray.push(card);
-                checkForMatch(_event);
+                if (choosenArray.length < 2 && card.classList.contains("is-hidden") && card != choosenArray[0]) {
+                    card.classList.remove("is-hidden");
+                    card.classList.add("open");
+                    choosenArray.push(card);
+                    checkForMatch(_event);
+                }
             });
             secCard.addEventListener("click", function () {
-                secCard.classList.remove("is-hidden");
-                secCard.classList.add("open");
-                choosenArray.push(secCard);
-                checkForMatch(_event);
+                if (choosenArray.length < 2 && secCard.classList.contains("is-hidden") && secCard != choosenArray[0]) {
+                    secCard.classList.remove("is-hidden");
+                    secCard.classList.add("open");
+                    choosenArray.push(secCard);
+                    checkForMatch(_event);
+                }
             });
         }
     }
@@ -78,7 +85,7 @@ var L02memory;
                 }
                 choosenArray = [];
                 endGame();
-            }, 1000);
+            }, 2000);
         }
     }
     let startTime = new Date().getTime();
@@ -91,14 +98,12 @@ var L02memory;
     }
     function endGame() {
         if (hideCards.length == playCardArray.length) {
+            timer();
             div.innerHTML = "";
             let congrat = document.createElement("div");
-            congrat.innerHTML = "<p>Congratulation you won!</p><br><p>Time:" + timeCounter + "</p>";
+            congrat.innerHTML = "<p>Congratulation you won!</p><br><p>Time:" + timeCounter + "sec</p>";
             div.appendChild(congrat);
         }
-    }
-    function arrangeCards() {
-        playCardArray.sort(() => 0.5 - Math.random());
     }
 })(L02memory || (L02memory = {}));
 //# sourceMappingURL=memory_script.js.map

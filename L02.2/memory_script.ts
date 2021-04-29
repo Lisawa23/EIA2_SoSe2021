@@ -8,7 +8,6 @@ namespace L02memory {
     let choosenArray: HTMLElement [] = [];
     let hideCards: HTMLElement [] = [];
 
-
     function handleLoad(_event: Event): void { 
     let start: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button");
     start.addEventListener("click", createCards);
@@ -24,7 +23,6 @@ namespace L02memory {
     let fontColor: FormDataEntryValue = <FormDataEntryValue>formData.get("Color3");
     let fontFamily: FormDataEntryValue = <FormDataEntryValue>formData.get("Radiogroup");
    
-
     div = <HTMLDivElement>document.querySelector(".form");
     div.innerHTML = "";
     div.style.backgroundColor = bColor.toString();
@@ -51,17 +49,25 @@ namespace L02memory {
         playCardArray.push(secCard);
         div.appendChild(secCard);
 
+        playCardArray.sort(() => 0.6 - Math.random());
+        div.appendChild(playCardArray[i]);
+        timer(); 
+
         card.addEventListener("click", function(): void {
+        if (choosenArray.length < 2 && card.classList.contains("is-hidden") && card != choosenArray[0]) {
         card.classList.remove("is-hidden");
         card.classList.add("open");
         choosenArray.push(card);
         checkForMatch(_event);
+        }
         });
         secCard.addEventListener("click", function(): void {
+        if (choosenArray.length < 2 && secCard.classList.contains("is-hidden") && secCard != choosenArray[0]) {
         secCard.classList.remove("is-hidden");
         secCard.classList.add("open");
         choosenArray.push(secCard);
         checkForMatch(_event);
+        }
         });
     }
     }
@@ -86,7 +92,7 @@ namespace L02memory {
             }
             choosenArray = [];
             endGame();
-        },             1000);
+        },             2000);
         }
     }
 
@@ -96,19 +102,17 @@ namespace L02memory {
     if (hideCards.length !== playCardArray.length) {
         let time: number = new Date().getTime() - startTime;
         timeCounter = Math.floor(time / 1000);
-    }
+        }
     }
    
     function endGame(): void {
         if (hideCards.length == playCardArray.length) {
+            timer();
             div.innerHTML = "";
             let congrat: HTMLElement = document.createElement("div");
-            congrat.innerHTML = "<p>Congratulation you won!</p><br><p>Time:" + timeCounter + "</p>";
+            congrat.innerHTML = "<p>Congratulation you won!</p><br><p>Time:" + timeCounter + "sec</p>";
             div.appendChild(congrat);
         }
-    }
-    function arrangeCards(): void {
-        playCardArray.sort(() => 0.5 - Math.random());
     }
 
 }
