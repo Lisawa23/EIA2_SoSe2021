@@ -8,6 +8,8 @@ var L03NewMemory;
     let choosenArray = [];
     let hideCards = [];
     let inputNo = 0;
+    let startTime = 0;
+    let endTime = 0;
     function handleLoad(_event) {
         let start = document.querySelector("button");
         start.addEventListener("click", createCards);
@@ -20,6 +22,9 @@ var L03NewMemory;
         }
         else {
             inputNo = 5;
+        }
+        if (inputNo < 5 || inputNo > 25) {
+            createCards(_event);
         }
         let slider = formData.get("Slider");
         let bColor = formData.get("Color1");
@@ -52,11 +57,11 @@ var L03NewMemory;
             div.appendChild(secCard);
             playCardArray.sort(() => 0.5 - Math.random());
             div.appendChild(playCardArray[i]);
-            timer();
             card.addEventListener("click", function () {
                 if (choosenArray.length < 2 && card.classList.contains("is-hidden") && card != choosenArray[0]) {
                     card.classList.remove("is-hidden");
                     card.classList.add("open");
+                    console.log(card);
                     choosenArray.push(card);
                     checkForMatch(_event);
                 }
@@ -70,6 +75,7 @@ var L03NewMemory;
                 }
             });
         }
+        startTime = new Date().getTime();
     }
     function checkForMatch(_event) {
         if (choosenArray.length == 2) {
@@ -94,21 +100,23 @@ var L03NewMemory;
             }, 2000);
         }
     }
-    let startTime = new Date().getTime();
-    let timeCounter = 0;
-    function timer() {
-        if (hideCards.length !== playCardArray.length) {
-            let time = new Date().getTime() - startTime;
-            timeCounter = Math.floor(time / 1000);
-        }
-    }
     function endGame() {
         if (hideCards.length == playCardArray.length) {
-            timer();
+            endTime = new Date().getTime() - startTime;
+            let timeCounter = Math.floor(endTime / 1000);
+            console.log(timeCounter);
             div.innerHTML = "";
-            let congrat = document.createElement("div");
-            congrat.innerHTML = "<br><br><br><p>Congratulation you won!</p><br><p>Time: " + timeCounter + " sec</p>";
-            div.appendChild(congrat);
+            let message = document.createElement("div");
+            message.innerHTML = "<br><br><br><p>Congratulation you won!</p><br><p>Time: " + timeCounter + " sec</p>";
+            div.appendChild(message);
+            let again = document.createElement("div");
+            again.innerHTML = "<button>Again</button>";
+            again.classList.add("again");
+            div.appendChild(again);
+            again.addEventListener("click", function (e) {
+                e.preventDefault();
+                location.reload();
+            });
         }
     }
 })(L03NewMemory || (L03NewMemory = {}));

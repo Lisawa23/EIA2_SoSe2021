@@ -8,11 +8,14 @@ namespace L03NewMemory {
     let choosenArray: HTMLElement [] = [];
     let hideCards: HTMLElement [] = [];
     let inputNo: number = 0;
+    let startTime: number = 0;
+    let endTime: number = 0;
 
     function handleLoad(_event: Event): void { 
     let start: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button");
     start.addEventListener("click", createCards);
     }
+    
 
     function createCards(_event: Event): void {  
     let formData: FormData = new FormData(document.forms[0]);
@@ -23,7 +26,9 @@ namespace L03NewMemory {
     else {
         inputNo = 5;
     }
-  
+    if (inputNo < 5 || inputNo > 25) {
+        createCards(_event);
+    }
     let slider: FormDataEntryValue = <FormDataEntryValue>formData.get("Slider"); 
     let bColor: FormDataEntryValue = <FormDataEntryValue>formData.get("Color1");
     let cardBackColor: FormDataEntryValue = <FormDataEntryValue>formData.get("Color2");
@@ -58,12 +63,12 @@ namespace L03NewMemory {
 
         playCardArray.sort(() => 0.5 - Math.random());
         div.appendChild(playCardArray[i]);
-        timer(); 
 
         card.addEventListener("click", function(): void {
         if (choosenArray.length < 2 && card.classList.contains("is-hidden") && card != choosenArray[0]) {
         card.classList.remove("is-hidden");
         card.classList.add("open");
+        console.log(card);
         choosenArray.push(card);
         checkForMatch(_event);
         }
@@ -77,6 +82,7 @@ namespace L03NewMemory {
         }
         });
     }
+    startTime = new Date().getTime();
     }
 
     function checkForMatch(_event: Event): void {
@@ -102,24 +108,24 @@ namespace L03NewMemory {
         },             2000);
         }
     }
-
-    let startTime: number = new Date().getTime();
-    let timeCounter: number = 0;
-    function timer(): void {
-    if (hideCards.length !== playCardArray.length) {
-        let time: number = new Date().getTime() - startTime;
-        timeCounter = Math.floor(time / 1000);
-        }
-    }
    
     function endGame(): void {
         if (hideCards.length == playCardArray.length) {
-            timer();
+            endTime = new Date().getTime() - startTime;
+            let timeCounter: number = Math.floor(endTime / 1000);
+            console.log(timeCounter);
             div.innerHTML = "";
-            let congrat: HTMLElement = document.createElement("div");
-            congrat.innerHTML = "<br><br><br><p>Congratulation you won!</p><br><p>Time: " + timeCounter + " sec</p>";
-            div.appendChild(congrat);
+            let message: HTMLElement = document.createElement("div");
+            message.innerHTML = "<br><br><br><p>Congratulation you won!</p><br><p>Time: " + timeCounter + " sec</p>";
+            div.appendChild(message);
+            let again: HTMLElement = document.createElement("div");
+            again.innerHTML = "<button>Again</button>";
+            again.classList.add("again");
+            div.appendChild(again);
+            again.addEventListener("click", function(e: Event): void {
+            e.preventDefault();
+            location.reload();
+            });
         }
     }
-
 }

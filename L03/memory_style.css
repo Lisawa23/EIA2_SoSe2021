@@ -1,7 +1,7 @@
 .form {
     margin: 0 auto;
 	text-align: center;
-    background-color: #088036;
+    background-color: #2faa5e;
     height: 530px;
     width: 1280px;
 }
@@ -13,9 +13,6 @@ h1 {
 .front {
     margin: 2%;
     float: left;
-}
-.open {
-    background-color: #2d889d;
 }
 
 .is-hidden {
