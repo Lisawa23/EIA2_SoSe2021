@@ -61,9 +61,6 @@ namespace L03NewMemory {
         playCardArray.push(secCard);
         div.appendChild(secCard);
 
-        playCardArray.sort(() => 0.5 - Math.random());
-        div.appendChild(playCardArray[i]);
-
         card.addEventListener("click", function(): void {
         if (choosenArray.length < 2 && card.classList.contains("is-hidden") && card != choosenArray[0]) {
         card.classList.remove("is-hidden");
@@ -81,6 +78,8 @@ namespace L03NewMemory {
         checkForMatch(_event);
         }
         });
+        playCardArray.sort(() => 0.5 - Math.random());
+        div.appendChild(playCardArray[i]);
     }
     startTime = new Date().getTime();
     }
@@ -120,7 +119,6 @@ namespace L03NewMemory {
             div.appendChild(message);
             let again: HTMLElement = document.createElement("div");
             again.innerHTML = "<button>Again</button>";
-            again.classList.add("again");
             div.appendChild(again);
             again.addEventListener("click", function(e: Event): void {
             e.preventDefault();
