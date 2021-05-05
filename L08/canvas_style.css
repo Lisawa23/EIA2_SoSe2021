@@ -4,6 +4,10 @@ body {
 
 canvas {
     background-color: #ffffff;
-    margin-top: 5%;
     margin-left: 25%;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
 }
