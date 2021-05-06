@@ -18,7 +18,30 @@ var L08Canvas;
     function start() {
         canvas = document.querySelector("canvas");
         crc2 = canvas.getContext("2d");
+        patternFunc();
+        createMoreCircles();
         paintPicture();
+        createCircle();
+        createSquare();
+        createTriangle();
+    }
+    function patternFunc() {
+        let pattern = document.createElement("canvas").getContext("2d");
+        pattern.canvas.width = 40;
+        pattern.canvas.height = 20;
+        pattern.fillStyle = "#fec";
+        pattern.fillRect(0, 0, pattern.canvas.width, pattern.canvas.height);
+        pattern.moveTo(0, Math.random() * 10);
+        pattern.lineTo(Math.random() * 10, Math.random() * 10);
+        pattern.lineTo(Math.random() * 20, 0);
+        pattern.lineTo(Math.random() * 30, 0);
+        pattern.lineTo(Math.random() * 40, Math.random() * 10);
+        pattern.lineTo(Math.random() * 30, 20);
+        pattern.lineTo(Math.random() * 20, 20);
+        pattern.lineTo(Math.random() * 10, Math.random() * 10);
+        pattern.stroke();
+        crc2.fillStyle = crc2.createPattern(pattern.canvas, "repeat");
+        crc2.fillRect(0, 0, canvas.width, canvas.height);
     }
     function paintPicture() {
         crc2.beginPath();
@@ -30,12 +53,12 @@ var L08Canvas;
             let lineSize = Math.floor(Math.random() * 4);
             crc2.moveTo(number1, number2);
             crc2.lineTo(number3, number4);
+            crc2.strokeStyle = color;
             crc2.lineWidth = lineSize;
         }
         crc2.stroke();
-        createCircle();
     }
-    //https://stackoverflow.com/questions/22237497/draw-a-circle-filled-with-random-color-sqares-on-canvas
+    // inspiriert von: https://stackoverflow.com/questions/22237497/draw-a-circle-filled-with-random-color-sqares-on-canvas
     function createCircle() {
         let dia = canvas.width / 2; // get context 
         let radius = dia * 0.5;
@@ -65,11 +88,16 @@ var L08Canvas;
     let positionY = 0;
     let positionX = 0;
     let size = 0;
+    let h = Math.floor(Math.random() * 360);
+    let s = Math.floor(Math.random() * 100);
+    let l = Math.floor(Math.random() * 100);
+    let a = 0.6;
     function createSquare() {
         positionY += Math.round(Math.random() * (canvas.height / 2));
         positionX += Math.round(Math.random() * (canvas.width / 2));
         size += Math.round(Math.random() * (canvas.width / 4));
-        crc2.fillStyle = color4;
+        crc2.fillStyle = "hsla(" + h + "," + s + "%," + l + "%," + a + ")";
+        crc2.strokeStyle = color2;
         crc2.strokeRect(positionX, positionY, size, size);
         crc2.fillRect(positionX + 10, positionY + 10, size, size);
         createTriangle();
@@ -84,21 +112,23 @@ var L08Canvas;
             crc2.lineTo(positionY + 200, positionY + 200);
             crc2.closePath();
             crc2.fillStyle = color2;
+            crc2.strokeStyle = color4;
             crc2.fill();
             crc2.rotate(Math.PI * 90 / 180);
             crc2.stroke();
         }
-        // createMoreCircles();
+        createMoreCircles();
     }
-    // function createMoreCircles(): void {
-    //     var xKoord: number = Math.floor(Math.random() * canvas.width);
-    //     var yKoord: number = Math.floor(Math.random() * canvas.width);
-    //     var durchmesser: number = Math.floor(Math.random() * canvas.width / 2);
-    //     console.log(xKoord);
-    //     crc2.arc(xKoord, yKoord, durchmesser, durchmesser, 2 * Math.PI);
-    //     crc2.fillStyle = color;
-    //     crc2.fill();
-    //     crc2.stroke();
-    // }
+    function createMoreCircles() {
+        var xKoord = Math.floor(Math.random() * 200);
+        var yKoord = Math.floor(Math.random() * 200);
+        var durchmesser = Math.floor(Math.random() * 100);
+        for (var x = 0; x < 5; x++) {
+            crc2.arc(xKoord, yKoord, durchmesser, durchmesser, 2 * Math.PI);
+            crc2.fillStyle = color4;
+            crc2.fill();
+            crc2.stroke();
+        }
+    }
 })(L08Canvas || (L08Canvas = {}));
 //# sourceMappingURL=canvas_script.js.map
