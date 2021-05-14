@@ -8,17 +8,17 @@ namespace Blumenwiese {
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D;
     let golden: number = 0.5;
-    
+
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
             return;
-        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d"); 
+        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
         let horizon: number = crc2.canvas.height * golden;
         let posMountains: Vector = { x: 0, y: horizon };
         let posTreesStart: Vector = { x: 28, y: horizon + 5 };
-        let posTreesEnd: Vector = { x: crc2.canvas.width , y: horizon + 5 };
+        let posTreesEnd: Vector = { x: crc2.canvas.width, y: horizon + 5 };
         let posBush: Vector = { x: 400, y: horizon + 100 };
 
         drawBackground();
@@ -30,16 +30,16 @@ namespace Blumenwiese {
         drawTrees(14, posTreesStart, posTreesEnd, 0.25, 0.37, 1);
         posTreesStart.y = horizon + 15;
         drawTrees(14, posTreesStart, posTreesEnd, 0.20, 0.37, 1);
-        drawBush(posBush, {x: 60, y: 30});
+        drawBush(posBush, { x: 60, y: 30 });
         posBush = { x: 100, y: horizon + 50 };
-        drawBush(posBush, {x: 60, y: 30});
+        drawBush(posBush, { x: 60, y: 30 });
         posBush = { x: 500, y: horizon + 200 };
-        drawBush(posBush, {x: 60, y: 30});
-       
+        drawBush(posBush, { x: 60, y: 30 });
+
         for (let i: number = 0; i < 10; i++) {
-        drawFlowerRed();
-        drawFlowerBlue();
-        drawFlowerPink();   
+            drawFlowerRed();
+            drawFlowerBlue();
+            drawFlowerPink();
         }
 
     }
@@ -54,7 +54,7 @@ namespace Blumenwiese {
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
     }
 
-    
+
     function drawSun(_position: Vector): void {
         let r1: number = 30;
         let r2: number = 150;
@@ -205,7 +205,7 @@ namespace Blumenwiese {
         crc2.restore();
     }
 
-    
+
     function drawFlowerRed(): void {
         let horizon: number = crc2.canvas.height * golden;
         let posX: number = Math.floor(Math.random() * crc2.canvas.width);
@@ -228,14 +228,14 @@ namespace Blumenwiese {
         //Blütenblätter
         crc2.translate(posX, posY);
         for (let i: number = 0; i < 5; i++) {
-        crc2.rotate(Math.PI * 2 / 5);
-        crc2.beginPath();
-        crc2.moveTo(10, 10);
-        crc2.lineTo(-7, -10);
-        crc2.bezierCurveTo(-12, -25, 12, -25, 7, -10);
-        crc2.closePath();
-        crc2.fillStyle = "red";
-        crc2.fill();
+            crc2.rotate(Math.PI * 2 / 5);
+            crc2.beginPath();
+            crc2.moveTo(10, 10);
+            crc2.lineTo(-7, -10);
+            crc2.bezierCurveTo(-12, -25, 12, -25, 7, -10);
+            crc2.closePath();
+            crc2.fillStyle = "red";
+            crc2.fill();
         }
         crc2.restore();
 
@@ -268,10 +268,10 @@ namespace Blumenwiese {
 
         crc2.stroke();
         crc2.fill();
-       
+
         crc2.beginPath();
         moveTo(posX + 10, posY + 20);
-        crc2.arc(posX, posY , 9, 0, 1 * Math.PI);
+        crc2.arc(posX, posY, 9, 0, 1 * Math.PI);
 
         crc2.fillStyle = "blue";
         crc2.strokeStyle = "blue";
@@ -336,7 +336,4 @@ namespace Blumenwiese {
         crc2.stroke();
         crc2.restore();
     }
-    
-
-
 }
