@@ -25,7 +25,7 @@ namespace Blumenwiese {
         drawSun({ x: 100, y: 75 });
         drawCloud({ x: 400, y: 50 }, { x: 250, y: 75 });
         drawCloud({ x: 600, y: 225 }, { x: 250, y: 75 });
-        drawMountains(posMountains, 75, 200, "grey", "white");
+        drawMountains(posMountains, 75, 200, "grey", "white"); //min: 75, max: 200
         drawMountains(posMountains, 50, 150, "grey", "lightgrey");
         drawTrees(14, posTreesStart, posTreesEnd, 0.25, 0.37, 1);
         posTreesStart.y = horizon + 15;
@@ -48,7 +48,7 @@ namespace Blumenwiese {
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
         gradient.addColorStop(0, "lightblue");
         gradient.addColorStop(golden, "white");
-        gradient.addColorStop(1, "HSL(100, 80%, 30%)");
+        gradient.addColorStop(1, "green");
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
@@ -214,7 +214,7 @@ namespace Blumenwiese {
         crc2.beginPath();
         crc2.strokeStyle = "green";
         crc2.fillStyle = "green";
-        crc2.fillRect(posX, posY, 4, 50);
+        crc2.fillRect(posX, posY, 4, 50); //PositionX, PositionY, Stielbreite, Stiellänge
         //Blätter
         crc2.moveTo(posX, posY + 50);
         crc2.lineTo(posX + 10, posY + 10);
@@ -288,9 +288,6 @@ namespace Blumenwiese {
         crc2.fillStyle = "blue";
         crc2.fill();
         crc2.stroke();
-
-        crc2.restore();
-    
     }
 
 
@@ -314,7 +311,7 @@ namespace Blumenwiese {
 
         crc2.save();
         crc2.translate(posX, posY);
-        for (let blossoms: number = 80; blossoms > 8; blossoms -= 8) {
+        for (let i: number = 80; i > 8; i -= 8) {
             crc2.rotate(45 * Math.PI / 20);
             crc2.beginPath();
             crc2.moveTo(10, 20);
@@ -337,8 +334,6 @@ namespace Blumenwiese {
         crc2.strokeStyle = "yellow";
         crc2.fill();
         crc2.stroke();
-        crc2.restore();
-
         crc2.restore();
     }
     
