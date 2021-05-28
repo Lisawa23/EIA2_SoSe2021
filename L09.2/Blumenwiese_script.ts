@@ -27,7 +27,7 @@ namespace L09_Blumenwiese {
 
         drawBackground();
         drawSun({ x: 100, y: 75 });
-        createClouds(270, 75);
+        createClouds();
         window.setInterval(moveCloud, 50);
         drawMountains(posMountains, 75, 200, "grey", "white"); //min: 75, max: 200
         drawMountains(posMountains, 50, 150, "grey", "lightgrey");
@@ -70,7 +70,7 @@ namespace L09_Blumenwiese {
 
     function createClouds(): void {
         for (let i: number = 0; i < 1; i++) {
-            let cloud: Cloud = new Cloud({x: 270, y: 75}); // Egal was ich hier angebe, es wird als Fehler angezeigt :(, habe schon richtig viel dran probiert
+            let cloud: Cloud = new Cloud(); 
             cloudArray.push(cloud);                 
         }
     }
@@ -227,13 +227,13 @@ namespace L09_Blumenwiese {
         //main house
         crc2.beginPath();
         crc2.arc(300, 400, 50, 0, 2 * Math.PI);
-        crc2.fillStyle = "#d3a259";
+        crc2.fillStyle = "#d3a309";
         crc2.fill();
         crc2.closePath();
 
         crc2.beginPath();
         crc2.arc(300, 360, 50, 0, 2 * Math.PI);
-        crc2.fillStyle = "#d3a259";
+        crc2.fillStyle = "#d3a309";
         crc2.fill();
         crc2.closePath();
         //stripes
@@ -261,14 +261,14 @@ namespace L09_Blumenwiese {
         crc2.fill();
         crc2.closePath();
          //Ast
-         crc2.beginPath();
+        crc2.beginPath();
          // crc2.moveTo(0, 300);
-         crc2.fillStyle = "brown";
-         crc2.fillRect(250, 440, 100, 20);
+        crc2.fillStyle = "brown";
+        crc2.fillRect(250, 440, 100, 20);
  
-         crc2.closePath();
+        crc2.closePath();
  
-         crc2.save();
+        crc2.save();
     }
 
     function drawFlowerRed(): void {

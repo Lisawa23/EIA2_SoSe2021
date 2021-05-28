@@ -18,7 +18,7 @@ var L09_Blumenwiese;
         let posBush = { x: 400, y: horizon + 100 };
         drawBackground();
         drawSun({ x: 100, y: 75 });
-        createClouds(270, 75);
+        createClouds();
         window.setInterval(moveCloud, 50);
         drawMountains(posMountains, 75, 200, "grey", "white"); //min: 75, max: 200
         drawMountains(posMountains, 50, 150, "grey", "lightgrey");
@@ -54,7 +54,7 @@ var L09_Blumenwiese;
     }
     function createClouds() {
         for (let i = 0; i < 1; i++) {
-            let cloud = new L09_Blumenwiese.Cloud({ x: 270, y: 75 }); // Egal was ich hier angebe, es wird als Fehler angezeigt :(, habe schon richtig viel dran probiert
+            let cloud = new L09_Blumenwiese.Cloud();
             cloudArray.push(cloud);
         }
     }
@@ -176,12 +176,12 @@ var L09_Blumenwiese;
         //main house
         L09_Blumenwiese.crc2.beginPath();
         L09_Blumenwiese.crc2.arc(300, 400, 50, 0, 2 * Math.PI);
-        L09_Blumenwiese.crc2.fillStyle = "#d3a259";
+        L09_Blumenwiese.crc2.fillStyle = "#d3a309";
         L09_Blumenwiese.crc2.fill();
         L09_Blumenwiese.crc2.closePath();
         L09_Blumenwiese.crc2.beginPath();
         L09_Blumenwiese.crc2.arc(300, 360, 50, 0, 2 * Math.PI);
-        L09_Blumenwiese.crc2.fillStyle = "#d3a259";
+        L09_Blumenwiese.crc2.fillStyle = "#d3a309";
         L09_Blumenwiese.crc2.fill();
         L09_Blumenwiese.crc2.closePath();
         //stripes

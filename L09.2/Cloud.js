@@ -8,7 +8,10 @@ var L09_Blumenwiese;
             else
                 this.position = new L09_Blumenwiese.Vector(50, 50);
             this.velocity = new L09_Blumenwiese.Vector(30, 0);
-            this.size = _size;
+            if (_size)
+                this.size = _size;
+            else
+                this.size = new L09_Blumenwiese.Vector(270, 75);
         }
         move(_timeslice) {
             let offset = new L09_Blumenwiese.Vector(this.velocity.x, this.velocity.y);

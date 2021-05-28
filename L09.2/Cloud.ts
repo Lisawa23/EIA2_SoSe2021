@@ -4,7 +4,7 @@ namespace L09_Blumenwiese {
         velocity: Vector;
         size: Vector;
 
-        constructor(_size: Vector, _position?: Vector) {
+        constructor(_size?: Vector, _position?: Vector) {
 
             if (_position) 
                 this.position = _position;
@@ -12,8 +12,11 @@ namespace L09_Blumenwiese {
                 this.position = new Vector(50, 50); 
                 
             this.velocity = new Vector(30, 0); 
-
+            
+            if (_size) 
             this.size = _size;
+            else
+            this.size = new Vector(270, 75);
         }
 
         move(_timeslice: number): void { 
