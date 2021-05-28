@@ -4,6 +4,7 @@ var L09_Blumenwiese;
     let imageData;
     let cloudArray = [];
     let beeArray = [];
+    let flowerArray = [];
     window.addEventListener("load", handleLoad);
     L09_Blumenwiese.golden = 0.5;
     function handleLoad(_event) {
@@ -30,12 +31,9 @@ var L09_Blumenwiese;
         drawBush(posBush, { x: 60, y: 30 });
         posBush = { x: 500, y: horizon + 200 };
         drawBush(posBush, { x: 60, y: 30 });
-        for (let i = 0; i < 10; i++) {
-            drawFlowerRed();
-            drawFlowerBlue();
-            drawFlowerPink();
-        }
         drawHome();
+        createFlower();
+        // drawFlower();
         imageData = L09_Blumenwiese.crc2.getImageData(0, 0, L09_Blumenwiese.crc2.canvas.width, L09_Blumenwiese.crc2.canvas.height);
         createBee();
         window.setInterval(moveBee, 20);
@@ -216,120 +214,22 @@ var L09_Blumenwiese;
         L09_Blumenwiese.crc2.closePath();
         L09_Blumenwiese.crc2.save();
     }
-    function drawFlowerRed() {
-        let horizon = L09_Blumenwiese.crc2.canvas.height * L09_Blumenwiese.golden;
-        let posX = Math.floor(Math.random() * L09_Blumenwiese.crc2.canvas.width);
-        let posY = horizon + Math.floor(Math.random() * 250);
-        // Blumenstiel
-        L09_Blumenwiese.crc2.beginPath();
-        L09_Blumenwiese.crc2.strokeStyle = "green";
-        L09_Blumenwiese.crc2.fillStyle = "green";
-        L09_Blumenwiese.crc2.fillRect(posX, posY, 4, 50); //PositionX, PositionY, Stielbreite, Stiellänge
-        //Blätter
-        L09_Blumenwiese.crc2.moveTo(posX, posY + 50);
-        L09_Blumenwiese.crc2.lineTo(posX + 10, posY + 10);
-        L09_Blumenwiese.crc2.moveTo(posX, posY + 40);
-        L09_Blumenwiese.crc2.lineTo(posX - 10, posY + 20);
-        L09_Blumenwiese.crc2.stroke();
-        L09_Blumenwiese.crc2.fill();
-        L09_Blumenwiese.crc2.save();
-        //Blütenblätter
-        L09_Blumenwiese.crc2.translate(posX, posY);
-        for (let i = 0; i < 5; i++) {
-            L09_Blumenwiese.crc2.rotate(Math.PI * 2 / 5);
-            L09_Blumenwiese.crc2.beginPath();
-            L09_Blumenwiese.crc2.moveTo(10, 10);
-            L09_Blumenwiese.crc2.lineTo(-7, -10);
-            L09_Blumenwiese.crc2.bezierCurveTo(-12, -25, 12, -25, 7, -10);
-            L09_Blumenwiese.crc2.closePath();
-            L09_Blumenwiese.crc2.fillStyle = "red";
-            L09_Blumenwiese.crc2.fill();
+    function createFlower() {
+        for (let i = 0; i < 10; i++) {
+            let flowerRed = new L09_Blumenwiese.Flower();
+            flowerRed.drawFlowerRed();
+            flowerArray.push(flowerRed);
         }
-        L09_Blumenwiese.crc2.restore();
-        //Blüte
-        L09_Blumenwiese.crc2.save();
-        L09_Blumenwiese.crc2.translate(posX, posY);
-        L09_Blumenwiese.crc2.beginPath();
-        L09_Blumenwiese.crc2.arc(0, 0, 7, 0, 2 * Math.PI);
-        L09_Blumenwiese.crc2.closePath();
-        L09_Blumenwiese.crc2.fillStyle = "yellow";
-        L09_Blumenwiese.crc2.fill();
-        L09_Blumenwiese.crc2.restore();
-    }
-    function drawFlowerBlue() {
-        let horizon = L09_Blumenwiese.crc2.canvas.height * L09_Blumenwiese.golden;
-        let posX = Math.floor(Math.random() * L09_Blumenwiese.crc2.canvas.width);
-        let posY = horizon + Math.floor(Math.random() * 250);
-        // Blumenstiel
-        L09_Blumenwiese.crc2.beginPath();
-        L09_Blumenwiese.crc2.strokeStyle = "green";
-        L09_Blumenwiese.crc2.fillStyle = "green";
-        L09_Blumenwiese.crc2.fillRect(posX, posY, 4, 50);
-        //Blätter
-        L09_Blumenwiese.crc2.moveTo(posX, posY + 50);
-        L09_Blumenwiese.crc2.lineTo(posX + 10, posY + 10);
-        L09_Blumenwiese.crc2.moveTo(posX, posY + 40);
-        L09_Blumenwiese.crc2.lineTo(posX - 10, posY + 20);
-        L09_Blumenwiese.crc2.stroke();
-        L09_Blumenwiese.crc2.fill();
-        L09_Blumenwiese.crc2.beginPath();
-        moveTo(posX + 10, posY + 20);
-        L09_Blumenwiese.crc2.arc(posX, posY, 9, 0, 1 * Math.PI);
-        L09_Blumenwiese.crc2.fillStyle = "blue";
-        L09_Blumenwiese.crc2.strokeStyle = "blue";
-        L09_Blumenwiese.crc2.fill();
-        L09_Blumenwiese.crc2.stroke();
-        moveTo(posX, posY + 20);
-        L09_Blumenwiese.crc2.lineTo(posX - 10, posY - 10);
-        L09_Blumenwiese.crc2.lineTo(posX - 3, posY + 2);
-        L09_Blumenwiese.crc2.lineTo(posX + 1, posY - 10);
-        L09_Blumenwiese.crc2.lineTo(posX + 4, posY + 2);
-        L09_Blumenwiese.crc2.lineTo(posX + 9, posY - 10);
-        L09_Blumenwiese.crc2.lineTo(posX + 9, posY + 3);
-        L09_Blumenwiese.crc2.closePath();
-        L09_Blumenwiese.crc2.fillStyle = "blue";
-        L09_Blumenwiese.crc2.fill();
-        L09_Blumenwiese.crc2.stroke();
-    }
-    function drawFlowerPink() {
-        let horizon = L09_Blumenwiese.crc2.canvas.height * L09_Blumenwiese.golden;
-        let posX = Math.floor(Math.random() * L09_Blumenwiese.crc2.canvas.width);
-        let posY = horizon + Math.floor(Math.random() * 250);
-        // Blumenstiel
-        L09_Blumenwiese.crc2.beginPath();
-        L09_Blumenwiese.crc2.strokeStyle = "green";
-        L09_Blumenwiese.crc2.fillStyle = "green";
-        L09_Blumenwiese.crc2.fillRect(posX, posY, 4, 50);
-        //Blätter
-        L09_Blumenwiese.crc2.moveTo(posX, posY + 50);
-        L09_Blumenwiese.crc2.lineTo(posX + 10, posY + 10);
-        L09_Blumenwiese.crc2.moveTo(posX, posY + 40);
-        L09_Blumenwiese.crc2.lineTo(posX - 10, posY + 20);
-        L09_Blumenwiese.crc2.stroke();
-        L09_Blumenwiese.crc2.fill();
-        L09_Blumenwiese.crc2.save();
-        L09_Blumenwiese.crc2.translate(posX, posY);
-        for (let i = 80; i > 8; i -= 8) {
-            L09_Blumenwiese.crc2.rotate(45 * Math.PI / 20);
-            L09_Blumenwiese.crc2.beginPath();
-            L09_Blumenwiese.crc2.moveTo(10, 20);
-            L09_Blumenwiese.crc2.bezierCurveTo(-12, -25, 12, -25, 7, -10);
-            L09_Blumenwiese.crc2.fillStyle = "pink";
-            L09_Blumenwiese.crc2.strokeStyle = "pink";
-            L09_Blumenwiese.crc2.fill();
-            L09_Blumenwiese.crc2.stroke();
+        for (let i = 0; i < 10; i++) {
+            let flowerBlue = new L09_Blumenwiese.Flower();
+            flowerBlue.drawFlowerBlue();
+            flowerArray.push(flowerBlue);
         }
-        L09_Blumenwiese.crc2.restore();
-        //Blüte
-        L09_Blumenwiese.crc2.save();
-        L09_Blumenwiese.crc2.beginPath();
-        moveTo(posX + 10, posY + 20);
-        L09_Blumenwiese.crc2.arc(posX, posY, 5, 0, 2 * Math.PI);
-        L09_Blumenwiese.crc2.fillStyle = "yellow";
-        L09_Blumenwiese.crc2.strokeStyle = "yellow";
-        L09_Blumenwiese.crc2.fill();
-        L09_Blumenwiese.crc2.stroke();
-        L09_Blumenwiese.crc2.restore();
+        for (let i = 0; i < 10; i++) {
+            let flowerPink = new L09_Blumenwiese.Flower();
+            flowerPink.drawFlowerPink();
+            flowerArray.push(flowerPink);
+        }
     }
 })(L09_Blumenwiese || (L09_Blumenwiese = {}));
 //# sourceMappingURL=Blumenwiese_script.js.map

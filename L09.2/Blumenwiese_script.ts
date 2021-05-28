@@ -8,6 +8,7 @@ namespace L09_Blumenwiese {
     let imageData: ImageData;
     let cloudArray: Cloud [] = [];
     let beeArray: Bee [] = [];
+    let flowerArray: Flower [] = [];
 
     window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
@@ -39,13 +40,9 @@ namespace L09_Blumenwiese {
         drawBush(posBush, { x: 60, y: 30 });
         posBush = { x: 500, y: horizon + 200 };
         drawBush(posBush, { x: 60, y: 30 });
-
-        for (let i: number = 0; i < 10; i++) {
-            drawFlowerRed();
-            drawFlowerBlue();
-            drawFlowerPink();
-        }
         drawHome();
+        createFlower();
+        // drawFlower();
 
         imageData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         
@@ -271,134 +268,22 @@ namespace L09_Blumenwiese {
         crc2.save();
     }
 
-    function drawFlowerRed(): void {
-        let horizon: number = crc2.canvas.height * golden;
-        let posX: number = Math.floor(Math.random() * crc2.canvas.width);
-        let posY: number = horizon + Math.floor(Math.random() * 250);
-        // Blumenstiel
-        crc2.beginPath();
-        crc2.strokeStyle = "green";
-        crc2.fillStyle = "green";
-        crc2.fillRect(posX, posY, 4, 50); //PositionX, PositionY, Stielbreite, Stiellänge
-        //Blätter
-        crc2.moveTo(posX, posY + 50);
-        crc2.lineTo(posX + 10, posY + 10);
-        crc2.moveTo(posX, posY + 40);
-        crc2.lineTo(posX - 10, posY + 20);
-
-        crc2.stroke();
-        crc2.fill();
-        crc2.save();
-
-        //Blütenblätter
-        crc2.translate(posX, posY);
-        for (let i: number = 0; i < 5; i++) {
-            crc2.rotate(Math.PI * 2 / 5);
-            crc2.beginPath();
-            crc2.moveTo(10, 10);
-            crc2.lineTo(-7, -10);
-            crc2.bezierCurveTo(-12, -25, 12, -25, 7, -10);
-            crc2.closePath();
-            crc2.fillStyle = "red";
-            crc2.fill();
+    function createFlower(): void {
+        for (let i: number = 0; i < 10; i++) {
+            let flowerRed: Flower = new Flower();
+            flowerRed.drawFlowerRed();
+            flowerArray.push(flowerRed);
         }
-        crc2.restore();
-
-        //Blüte
-        crc2.save();
-        crc2.translate(posX, posY);
-        crc2.beginPath();
-        crc2.arc(0, 0, 7, 0, 2 * Math.PI);
-        crc2.closePath();
-        crc2.fillStyle = "yellow";
-        crc2.fill();
-
-        crc2.restore();
-    }
-
-    function drawFlowerBlue(): void {
-        let horizon: number = crc2.canvas.height * golden;
-        let posX: number = Math.floor(Math.random() * crc2.canvas.width);
-        let posY: number = horizon + Math.floor(Math.random() * 250);
-        // Blumenstiel
-        crc2.beginPath();
-        crc2.strokeStyle = "green";
-        crc2.fillStyle = "green";
-        crc2.fillRect(posX, posY, 4, 50);
-        //Blätter
-        crc2.moveTo(posX, posY + 50);
-        crc2.lineTo(posX + 10, posY + 10);
-        crc2.moveTo(posX, posY + 40);
-        crc2.lineTo(posX - 10, posY + 20);
-
-        crc2.stroke();
-        crc2.fill();
-
-        crc2.beginPath();
-        moveTo(posX + 10, posY + 20);
-        crc2.arc(posX, posY, 9, 0, 1 * Math.PI);
-
-        crc2.fillStyle = "blue";
-        crc2.strokeStyle = "blue";
-        crc2.fill();
-        crc2.stroke();
-        moveTo(posX, posY + 20);
-        crc2.lineTo(posX - 10, posY - 10);
-        crc2.lineTo(posX - 3, posY + 2);
-        crc2.lineTo(posX + 1, posY - 10);
-        crc2.lineTo(posX + 4, posY + 2);
-        crc2.lineTo(posX + 9, posY - 10);
-        crc2.lineTo(posX + 9, posY + 3);
-        crc2.closePath();
-        crc2.fillStyle = "blue";
-        crc2.fill();
-        crc2.stroke();
-    }
-
-
-    function drawFlowerPink(): void {
-        let horizon: number = crc2.canvas.height * golden;
-        let posX: number = Math.floor(Math.random() * crc2.canvas.width);
-        let posY: number = horizon + Math.floor(Math.random() * 250);
-        // Blumenstiel
-        crc2.beginPath();
-        crc2.strokeStyle = "green";
-        crc2.fillStyle = "green";
-        crc2.fillRect(posX, posY, 4, 50);
-        //Blätter
-        crc2.moveTo(posX, posY + 50);
-        crc2.lineTo(posX + 10, posY + 10);
-        crc2.moveTo(posX, posY + 40);
-        crc2.lineTo(posX - 10, posY + 20);
-
-        crc2.stroke();
-        crc2.fill();
-
-        crc2.save();
-        crc2.translate(posX, posY);
-        for (let i: number = 80; i > 8; i -= 8) {
-            crc2.rotate(45 * Math.PI / 20);
-            crc2.beginPath();
-            crc2.moveTo(10, 20);
-            crc2.bezierCurveTo(-12, -25, 12, -25, 7, -10);
-            crc2.fillStyle = "pink";
-            crc2.strokeStyle = "pink";
-            crc2.fill();
-
-            crc2.stroke();
-
+        for (let i: number = 0; i < 10; i++) {
+            let flowerBlue: Flower = new Flower();
+            flowerBlue.drawFlowerBlue();
+            flowerArray.push(flowerBlue);
         }
-        crc2.restore();
-
-        //Blüte
-        crc2.save();
-        crc2.beginPath();
-        moveTo(posX + 10, posY + 20);
-        crc2.arc(posX, posY, 5, 0, 2 * Math.PI);
-        crc2.fillStyle = "yellow";
-        crc2.strokeStyle = "yellow";
-        crc2.fill();
-        crc2.stroke();
-        crc2.restore();
+        for (let i: number = 0; i < 10; i++) {
+            let flowerPink: Flower = new Flower();
+            flowerPink.drawFlowerPink();
+            flowerArray.push(flowerPink);
+        }
     }
+
 }
