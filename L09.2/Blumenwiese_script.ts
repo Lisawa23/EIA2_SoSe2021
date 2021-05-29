@@ -9,10 +9,10 @@ namespace L09_Blumenwiese {
     let cloudArray: Cloud [] = [];
     let beeArray: Bee [] = [];
     let flowerArray: Flower [] = [];
-
-    window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
     export let golden: number = 0.5;
+
+    window.addEventListener("load", handleLoad);
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -66,10 +66,8 @@ namespace L09_Blumenwiese {
     }
 
     function createClouds(): void {
-        for (let i: number = 0; i < 1; i++) {
             let cloud: Cloud = new Cloud(); 
             cloudArray.push(cloud);                 
-        }
     }
 
     function moveCloud(): void {
@@ -220,7 +218,6 @@ namespace L09_Blumenwiese {
     }
 
     function drawHome(): void {
-        crc2.restore();
         //main house
         crc2.beginPath();
         crc2.arc(300, 400, 50, 0, 2 * Math.PI);
@@ -251,7 +248,7 @@ namespace L09_Blumenwiese {
         crc2.lineWidth = 2;
         crc2.stroke();
         crc2.closePath();
-        //entrance
+        //Eingang
         crc2.beginPath();
         crc2.arc(300, 420, 10, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
@@ -259,13 +256,10 @@ namespace L09_Blumenwiese {
         crc2.closePath();
          //Ast
         crc2.beginPath();
-         // crc2.moveTo(0, 300);
         crc2.fillStyle = "brown";
         crc2.fillRect(250, 440, 100, 20);
  
         crc2.closePath();
- 
-        crc2.save();
     }
 
     function createFlower(): void {

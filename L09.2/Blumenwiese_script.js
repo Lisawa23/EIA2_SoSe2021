@@ -5,8 +5,8 @@ var L09_Blumenwiese;
     let cloudArray = [];
     let beeArray = [];
     let flowerArray = [];
-    window.addEventListener("load", handleLoad);
     L09_Blumenwiese.golden = 0.5;
+    window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -51,10 +51,8 @@ var L09_Blumenwiese;
         }
     }
     function createClouds() {
-        for (let i = 0; i < 1; i++) {
-            let cloud = new L09_Blumenwiese.Cloud();
-            cloudArray.push(cloud);
-        }
+        let cloud = new L09_Blumenwiese.Cloud();
+        cloudArray.push(cloud);
     }
     function moveCloud() {
         L09_Blumenwiese.crc2.clearRect(0, 0, L09_Blumenwiese.crc2.canvas.width, L09_Blumenwiese.crc2.canvas.height);
@@ -170,7 +168,6 @@ var L09_Blumenwiese;
         L09_Blumenwiese.crc2.restore();
     }
     function drawHome() {
-        L09_Blumenwiese.crc2.restore();
         //main house
         L09_Blumenwiese.crc2.beginPath();
         L09_Blumenwiese.crc2.arc(300, 400, 50, 0, 2 * Math.PI);
@@ -200,7 +197,7 @@ var L09_Blumenwiese;
         L09_Blumenwiese.crc2.lineWidth = 2;
         L09_Blumenwiese.crc2.stroke();
         L09_Blumenwiese.crc2.closePath();
-        //entrance
+        //Eingang
         L09_Blumenwiese.crc2.beginPath();
         L09_Blumenwiese.crc2.arc(300, 420, 10, 0, 2 * Math.PI);
         L09_Blumenwiese.crc2.fillStyle = "black";
@@ -208,11 +205,9 @@ var L09_Blumenwiese;
         L09_Blumenwiese.crc2.closePath();
         //Ast
         L09_Blumenwiese.crc2.beginPath();
-        // crc2.moveTo(0, 300);
         L09_Blumenwiese.crc2.fillStyle = "brown";
         L09_Blumenwiese.crc2.fillRect(250, 440, 100, 20);
         L09_Blumenwiese.crc2.closePath();
-        L09_Blumenwiese.crc2.save();
     }
     function createFlower() {
         for (let i = 0; i < 10; i++) {
