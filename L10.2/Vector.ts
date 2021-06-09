@@ -1,5 +1,5 @@
 namespace L10_Blumenwiese {
- export class Vector {
+    export class Vector {
         x: number;
         y: number;
 

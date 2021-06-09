@@ -33,16 +33,6 @@ var L10_Blumenwiese;
         createBee();
         window.setInterval(update, 20);
     }
-    function createBee() {
-        for (let i = 0; i < 10; i++) {
-            let bee = new L10_Blumenwiese.Bee(0.8);
-            moveables.push(bee);
-        }
-    }
-    function createClouds() {
-        let cloud = new L10_Blumenwiese.Cloud();
-        moveables.push(cloud);
-    }
     function drawBackground() {
         let gradient = L10_Blumenwiese.crc2.createLinearGradient(0, 0, 0, L10_Blumenwiese.crc2.canvas.height);
         gradient.addColorStop(0, "lightblue");
@@ -204,14 +194,24 @@ var L10_Blumenwiese;
             moveables.push(flowerPink);
         }
     }
+    function createBee() {
+        for (let i = 0; i < 10; i++) {
+            let bee = new L10_Blumenwiese.Bee(0.8);
+            moveables.push(bee);
+        }
+    }
+    function createClouds() {
+        let cloud = new L10_Blumenwiese.Cloud();
+        moveables.push(cloud);
+    }
     function update() {
         // console.log("Update");
         L10_Blumenwiese.crc2.fillRect(0, 0, L10_Blumenwiese.crc2.canvas.width, L10_Blumenwiese.crc2.canvas.height);
+        L10_Blumenwiese.crc2.putImageData(L10_Blumenwiese.imageData, 0, 0);
         for (let moveable of moveables) {
             moveable.move(1 / 50);
             moveable.draw();
         }
     }
-    console.log(moveables);
 })(L10_Blumenwiese || (L10_Blumenwiese = {}));
 //# sourceMappingURL=Blumenwiese_script.js.map

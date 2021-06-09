@@ -1,13 +1,13 @@
 namespace L10_Blumenwiese {
-    
+
     interface Vector {
         x: number;
         y: number;
     }
 
     export let imageData: ImageData;
-    let moveables: Moveable [] = [];
-    
+    let moveables: Moveable[] = [];
+
     export let crc2: CanvasRenderingContext2D;
     export let golden: number = 0.5;
 
@@ -27,7 +27,6 @@ namespace L10_Blumenwiese {
 
         drawBackground();
         drawSun({ x: 100, y: 75 });
-      
         drawMountains(posMountains, 75, 200, "grey", "white"); //min: 75, max: 200
         drawMountains(posMountains, 50, 150, "grey", "lightgrey");
         drawTrees(14, posTreesStart, posTreesEnd, 0.25, 0.37, 1);
@@ -39,28 +38,17 @@ namespace L10_Blumenwiese {
         posBush = { x: 500, y: horizon + 200 };
         drawBush(posBush, { x: 60, y: 30 });
         drawHome();
-    
+
         imageData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         createFlower();
         createClouds();
         createBee();
-        
+
         window.setInterval(update, 20);
-    
+
 
 
     }
-
-    function createBee(): void {
-        for (let i: number = 0; i < 10; i++) {
-            let bee: Bee = new Bee(0.8);
-            moveables.push(bee);    
-        }
-    }
-    function createClouds(): void {
-        let cloud: Cloud = new Cloud(); 
-        moveables.push(cloud);                 
-}
 
     function drawBackground(): void {
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
@@ -236,11 +224,11 @@ namespace L10_Blumenwiese {
         crc2.fillStyle = "black";
         crc2.fill();
         crc2.closePath();
-         //Ast
+        //Ast
         crc2.beginPath();
         crc2.fillStyle = "brown";
         crc2.fillRect(250, 440, 100, 20);
- 
+
         crc2.closePath();
     }
 
@@ -259,17 +247,26 @@ namespace L10_Blumenwiese {
         }
     }
 
+    function createBee(): void {
+        for (let i: number = 0; i < 10; i++) {
+            let bee: Bee = new Bee(0.8);
+            moveables.push(bee);
+        }
+    }
+    function createClouds(): void {
+        let cloud: Cloud = new Cloud();
+        moveables.push(cloud);
+    }
+
     function update(): void {
         // console.log("Update");
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        crc2.putImageData(imageData, 0, 0);
 
         for (let moveable of moveables) {
             moveable.move(1 / 50);
             moveable.draw();
         }
-
-        
     }
-    console.log(moveables);
 
 }
