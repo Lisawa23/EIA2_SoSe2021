@@ -4,6 +4,7 @@ var L10_Blumenwiese;
     class Cloud extends L10_Blumenwiese.Moveable {
         constructor(_size, _position) {
             super(_position);
+            this.particlePositions = [];
             if (_position)
                 this.position = _position;
             else
@@ -13,9 +14,14 @@ var L10_Blumenwiese;
                 this.size = _size;
             else
                 this.size = new L10_Blumenwiese.Vector(270, 75);
+            for (let drawn = 0; drawn < 50; drawn++) {
+                let x = (Math.random() - 0.5) * this.size.x;
+                let y = -(Math.random() * this.size.y);
+                let position = new L10_Blumenwiese.Vector(x, y);
+                this.particlePositions.push(position);
+            }
         }
         draw() {
-            let nParticles = 50;
             let radiusParticle = 50;
             let particle = new Path2D();
             let gradient = L10_Blumenwiese.crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
@@ -25,9 +31,9 @@ var L10_Blumenwiese;
             L10_Blumenwiese.crc2.save();
             L10_Blumenwiese.crc2.translate(this.position.x, this.position.y);
             L10_Blumenwiese.crc2.fillStyle = gradient;
-            for (let drawn = 0; drawn < nParticles; drawn++) {
+            for (let drawn of this.particlePositions) {
                 L10_Blumenwiese.crc2.save();
-                L10_Blumenwiese.crc2.translate((Math.random() - 0.5) * this.size.x, -(Math.random() * this.size.y));
+                L10_Blumenwiese.crc2.translate(drawn.x, drawn.y);
                 L10_Blumenwiese.crc2.fill(particle);
                 L10_Blumenwiese.crc2.restore();
             }

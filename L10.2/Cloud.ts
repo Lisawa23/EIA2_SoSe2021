@@ -4,9 +4,12 @@ namespace L10_Blumenwiese {
         velocity: Vector;
         size: Vector;
 
+        particlePositions: Vector[] = [];
+
         constructor(_size?: Vector, _position?: Vector) {
             super(_position);
 
+           
             if (_position)
                 this.position = _position;
             else
@@ -17,12 +20,18 @@ namespace L10_Blumenwiese {
             if (_size)
                 this.size = _size;
             else
-                this.size = new Vector(270, 75);
+                this.size = new Vector(270, 75); 
+
+            for (let drawn: number = 0; drawn < 50; drawn++) {
+                let x: number = (Math.random() - 0.5) * this.size.x;
+                let y: number = - (Math.random() * this.size.y);
+                let position: Vector = new Vector(x, y);
+                this.particlePositions.push(position);
+            }
         }
 
         draw(): void {
 
-            let nParticles: number = 50;
             let radiusParticle: number = 50;
             let particle: Path2D = new Path2D();
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
@@ -35,9 +44,9 @@ namespace L10_Blumenwiese {
             crc2.translate(this.position.x, this.position.y);
             crc2.fillStyle = gradient;
 
-            for (let drawn: number = 0; drawn < nParticles; drawn++) {
+            for (let drawn of this.particlePositions) {
                 crc2.save();
-                crc2.translate((Math.random() - 0.5) * this.size.x, - (Math.random() * this.size.y));
+                crc2.translate(drawn.x, drawn.y);
                 crc2.fill(particle);
                 crc2.restore();
             }
