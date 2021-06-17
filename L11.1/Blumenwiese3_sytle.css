@@ -6,11 +6,11 @@ canvas {
 .chartWrapper {
     z-index: 2;
     position: relative;
-    width: 150px;
+    width: 600px;
     height: 15px;
     background: rgb(255, 205, 113);
     border-radius: 10px;
-    right:-25%;
+    right:-7%;
     margin-bottom: 1%;
 }
 

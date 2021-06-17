@@ -36,7 +36,7 @@ var L11_1_Blumenwiese;
         createBee();
         window.setInterval(update, 20);
         flowerFillLevel();
-        window.setInterval(flowerFillLevel, 1500);
+        window.setInterval(flowerFillLevel, 3000);
     }
     function flowerFillLevel() {
         i++;
