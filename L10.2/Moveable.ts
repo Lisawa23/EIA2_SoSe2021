@@ -1,7 +1,7 @@
 namespace L10_Blumenwiese {
     export class Moveable {
-        position: Vector;
-        velocity: Vector;
+        public position: Vector;
+        public velocity: Vector;
 
         constructor(_position?: Vector) {
             if (_position)
@@ -13,7 +13,7 @@ namespace L10_Blumenwiese {
         }
 
 
-        move(_timeslice: number): void {
+        public move(_timeslice: number): void {
             // console.log("Moveable move");
             let offset: Vector = this.velocity.copy();
             offset.scale(_timeslice);
@@ -29,7 +29,7 @@ namespace L10_Blumenwiese {
                 this.position.y -= crc2.canvas.height;
         }
 
-        draw(): void {
+        public draw(): void {
             // console.log("Moveable move");
         }
 

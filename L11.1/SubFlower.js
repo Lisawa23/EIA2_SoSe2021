@@ -11,6 +11,9 @@ var L11_1_Blumenwiese;
         draw() {
             // console.log("Moveable move");
         }
+        fill(_timeslice) {
+            // console.log("fill");
+        }
     }
     L11_1_Blumenwiese.SubFlower = SubFlower;
 })(L11_1_Blumenwiese || (L11_1_Blumenwiese = {}));

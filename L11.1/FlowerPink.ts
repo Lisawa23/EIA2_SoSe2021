@@ -1,8 +1,10 @@
 namespace L11_1_Blumenwiese {
     export class FlowerPink extends SubFlower {
         protected position: Vector;
+        protected fillLevel: number;
+        protected velocity: Vector;
 
-        constructor(_position?: Vector) {
+        constructor(_fillLevel?: number, _position?: Vector) {
             super(_position);
 
             let horizon: number = crc2.canvas.height * golden;
@@ -12,6 +14,15 @@ namespace L11_1_Blumenwiese {
                 this.position = _position;
             else
                 this.position = new Vector(randomX, randomY);
+
+            let randomFill: number = Math.floor(Math.random() * 50);
+           
+            if (_fillLevel)
+                this.fillLevel = _fillLevel;
+            else
+                this.fillLevel = randomFill;
+            
+            this.velocity = new Vector(0, 0);
 
         }
 
@@ -56,6 +67,26 @@ namespace L11_1_Blumenwiese {
             crc2.fill();
             crc2.stroke();
             crc2.restore();
+        }
+
+        public fill(_timeslice: number): void {
+            for (let i: number = 0; i < 10; i++) {
+                crc2.beginPath();
+                crc2.fillRect(this.position.x + 25, this.position.y - 5, 4, this.fillLevel);
+                crc2.closePath();
+                crc2.fillStyle = "#eb4fb7";
+                crc2.strokeStyle = "#eb4fb7";
+                crc2.fill();
+                crc2.stroke();
+                }
+            let offset: Vector = this.velocity.copy();
+            offset.scale(_timeslice);
+            this.position.add(offset);
+    
+            if (this.fillLevel < 50)
+                    this.fillLevel += 0.03;
+            if (this.fillLevel > 50)
+                    this.fillLevel -= this.fillLevel;
         }
 
     }

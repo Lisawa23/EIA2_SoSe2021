@@ -1,8 +1,10 @@
 namespace L11_1_Blumenwiese {
     export class FlowerBlue extends SubFlower {
         protected position: Vector;
+        protected fillLevel: number;
+        protected velocity: Vector;
 
-        constructor(_position?: Vector) {
+        constructor(_fillLevel?: number, _position?: Vector) {
             super(_position);
 
             let horizon: number = crc2.canvas.height * golden;
@@ -13,6 +15,14 @@ namespace L11_1_Blumenwiese {
             else
                 this.position = new Vector(randomX, randomY);
 
+            let randomFill: number = Math.floor(Math.random() * 50);
+           
+            if (_fillLevel)
+                this.fillLevel = _fillLevel;
+            else
+                this.fillLevel = randomFill;
+            
+            this.velocity = new Vector(0, 0);
         }
 
         public draw(): void {
@@ -52,16 +62,29 @@ namespace L11_1_Blumenwiese {
             crc2.stroke();
 
             //Füllstand
+
           
         }
 
-        // fill(): void {
-        //     let chart: HTMLDivElement = document.createElement("div");
-        //     chart.classList.add("chartWrapper");
-        //     chart.setAttribute("style", "width:" + 20 * 6.25 + "%");
-
-        //     console.log(chart);
-        // }
+        public fill(_timeslice: number): void {
+            for (let i: number = 0; i < 10; i++) {
+                crc2.beginPath();
+                crc2.fillRect(this.position.x + 15, this.position.y - 5, 4, this.fillLevel);
+                crc2.closePath();
+                crc2.fillStyle = "#1411b8";
+                crc2.strokeStyle = "#1411b8";
+                crc2.fill();
+                crc2.stroke();
+                }
+            let offset: Vector = this.velocity.copy();
+            offset.scale(_timeslice);
+            this.position.add(offset);
+    
+            if (this.fillLevel < 50)
+                    this.fillLevel += 0.03;
+            if (this.fillLevel > 50)
+                    this.fillLevel -= this.fillLevel;
+        }
 
 
     }

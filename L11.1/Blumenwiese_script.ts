@@ -8,8 +8,6 @@ namespace L11_1_Blumenwiese {
     export let imageData: ImageData;
     let moveables: Moveable[] = [];
     let flowers: SubFlower[] = [];
-    let randomFill: number = Math.floor(Math.random() * 100);
-    let i: number = 0;
 
 
 
@@ -47,26 +45,12 @@ namespace L11_1_Blumenwiese {
         createFlower();
         createClouds();
         createBee();
-
         window.setInterval(update, 20);
-        flowerFillLevel();
-        window.setInterval(flowerFillLevel, 3000);
+        
 
 
 
-    }
 
-    function flowerFillLevel(): void {
-        i++;
-        let chart: HTMLElement = <HTMLElement>document.querySelector(".chart");
-        let fillNumber: HTMLElement = <HTMLElement>document.querySelector(".fillLevel");
-
-        chart.setAttribute("style", "width:" + (randomFill - i + "%"));
-        fillNumber.innerHTML = "Fill Level: " + (randomFill - i) + " %";
-        if ((randomFill - i) == 0) {
-            window.alert("The Fill level is 0. Please reload the page!");
-            location.reload();
-        }
     }
 
     function drawBackground(): void {
@@ -252,15 +236,15 @@ namespace L11_1_Blumenwiese {
     }
 
     function createFlower(): void {
-        for (let i: number = 0; i < 10; i++) {
+        for (let i: number = 0; i < 7; i++) {
             let flowerRed: FlowerRed = new FlowerRed();
             flowers.push(flowerRed);
         }
-        for (let i: number = 0; i < 10; i++) {
+        for (let i: number = 0; i < 7; i++) {
             let flowerBlue: FlowerBlue = new FlowerBlue();
             flowers.push(flowerBlue);
         }
-        for (let i: number = 0; i < 10; i++) {
+        for (let i: number = 0; i < 7; i++) {
             let flowerPink: FlowerPink = new FlowerPink();
             flowers.push(flowerPink);
         }
@@ -286,8 +270,10 @@ namespace L11_1_Blumenwiese {
             moveable.move(1 / 50);
             moveable.draw();
         }
+
         for (let flower of flowers) {
             flower.draw();
+            flower.fill(0.1);
         }
     }
 

@@ -14,6 +14,10 @@ namespace L11_1_Blumenwiese {
             // console.log("Moveable move");
         }
 
+        public fill(_timeslice: number): void {
+            // console.log("fill");
+        }
+
     }
 }
 

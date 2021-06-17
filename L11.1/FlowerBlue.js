@@ -2,7 +2,7 @@
 var L11_1_Blumenwiese;
 (function (L11_1_Blumenwiese) {
     class FlowerBlue extends L11_1_Blumenwiese.SubFlower {
-        constructor(_position) {
+        constructor(_fillLevel, _position) {
             super(_position);
             let horizon = L11_1_Blumenwiese.crc2.canvas.height * L11_1_Blumenwiese.golden;
             let randomX = Math.floor(Math.random() * L11_1_Blumenwiese.crc2.canvas.width);
@@ -11,6 +11,12 @@ var L11_1_Blumenwiese;
                 this.position = _position;
             else
                 this.position = new L11_1_Blumenwiese.Vector(randomX, randomY);
+            let randomFill = Math.floor(Math.random() * 50);
+            if (_fillLevel)
+                this.fillLevel = _fillLevel;
+            else
+                this.fillLevel = randomFill;
+            this.velocity = new L11_1_Blumenwiese.Vector(0, 0);
         }
         draw() {
             // Blumenstiel
@@ -45,6 +51,24 @@ var L11_1_Blumenwiese;
             L11_1_Blumenwiese.crc2.fill();
             L11_1_Blumenwiese.crc2.stroke();
             //Füllstand
+        }
+        fill(_timeslice) {
+            for (let i = 0; i < 10; i++) {
+                L11_1_Blumenwiese.crc2.beginPath();
+                L11_1_Blumenwiese.crc2.fillRect(this.position.x + 15, this.position.y - 5, 4, this.fillLevel);
+                L11_1_Blumenwiese.crc2.closePath();
+                L11_1_Blumenwiese.crc2.fillStyle = "#1411b8";
+                L11_1_Blumenwiese.crc2.strokeStyle = "#1411b8";
+                L11_1_Blumenwiese.crc2.fill();
+                L11_1_Blumenwiese.crc2.stroke();
+            }
+            let offset = this.velocity.copy();
+            offset.scale(_timeslice);
+            this.position.add(offset);
+            if (this.fillLevel < 50)
+                this.fillLevel += 0.03;
+            if (this.fillLevel > 50)
+                this.fillLevel -= this.fillLevel;
         }
     }
     L11_1_Blumenwiese.FlowerBlue = FlowerBlue;

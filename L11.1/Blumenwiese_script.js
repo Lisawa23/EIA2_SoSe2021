@@ -3,8 +3,6 @@ var L11_1_Blumenwiese;
 (function (L11_1_Blumenwiese) {
     let moveables = [];
     let flowers = [];
-    let randomFill = Math.floor(Math.random() * 100);
-    let i = 0;
     L11_1_Blumenwiese.golden = 0.5;
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
@@ -35,19 +33,6 @@ var L11_1_Blumenwiese;
         createClouds();
         createBee();
         window.setInterval(update, 20);
-        flowerFillLevel();
-        window.setInterval(flowerFillLevel, 3000);
-    }
-    function flowerFillLevel() {
-        i++;
-        let chart = document.querySelector(".chart");
-        let fillNumber = document.querySelector(".fillLevel");
-        chart.setAttribute("style", "width:" + (randomFill - i + "%"));
-        fillNumber.innerHTML = "Fill Level: " + (randomFill - i) + " %";
-        if ((randomFill - i) == 0) {
-            window.alert("The Fill level is 0. Please reload the page!");
-            location.reload();
-        }
     }
     function drawBackground() {
         let gradient = L11_1_Blumenwiese.crc2.createLinearGradient(0, 0, 0, L11_1_Blumenwiese.crc2.canvas.height);
@@ -197,15 +182,15 @@ var L11_1_Blumenwiese;
         L11_1_Blumenwiese.crc2.closePath();
     }
     function createFlower() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 7; i++) {
             let flowerRed = new L11_1_Blumenwiese.FlowerRed();
             flowers.push(flowerRed);
         }
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 7; i++) {
             let flowerBlue = new L11_1_Blumenwiese.FlowerBlue();
             flowers.push(flowerBlue);
         }
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 7; i++) {
             let flowerPink = new L11_1_Blumenwiese.FlowerPink();
             flowers.push(flowerPink);
         }
@@ -230,6 +215,7 @@ var L11_1_Blumenwiese;
         }
         for (let flower of flowers) {
             flower.draw();
+            flower.fill(0.1);
         }
     }
 })(L11_1_Blumenwiese || (L11_1_Blumenwiese = {}));
