@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="moveable.js"></script>
+    <script type="text/javascript" src="player.js"></script>
+    <script type="text/javascript" src="vector.js"></script>
+    <script type="text/javascript" src="field.js"></script>
+    <script type="text/javascript" src="ball.js"></script>
+    <script type="text/javascript" src="referee.js"></script>
+    <script type="text/javascript" src="assistant.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>L11 Advanced</title>
+</head>
+
+<body>
+    <form action="index.html" method="post">
+        <div class="form">
+        <h2>Choose here</h2>
+            <p>Who plays? <input type="text" placeholder="write a country" name="Text1"> vs. <input type="text" placeholder="write a country" name="Text2"></p>
+            <hr>
+            <p>select shirt color of team 1
+            <input type="color" name="Color1" placeholder="green" id="color1" value="#6dd38b"></p>
+            <hr>
+            <p>select shirt color of team 2
+            <input type="color" name="Color2" placeholder="green" id="color2" value="#dc5ad5"></p>
+            <hr>
+            <p>select shirt color of referee
+            <input type="color" name="Color3" placeholder="green" id="color3" value="#000000"></p>
+            <hr>
+            <p>select shirt color of assistant referee
+            <input type="color" name="Color4" placeholder="green" id="color4" value="#b67550"></p>
+            <hr>
+            <p>choose player velocity: minimal ->
+                <span>
+                    0
+            <input type="range" name="Slider1" min="0" max="50" step="1" id="slider"/> 50</span></p>     
+            <hr>  
+            <p>choose player velocity: maximal ->
+                <span>
+                    50
+            <input type="range" name="Slider2" min="50" max="100" step="1" id="slider"/> 100</span></p>      
+            <hr>  
+            <p>choose player precision: minimal ->
+                <span>
+                    0
+            <input type="range" name="Slider3" min="0" max="50" step="1" id="slider"/> 50</span></p>    
+            <hr>
+            <p>choose player precision: maximal ->
+                <span>
+                    50
+            <input type="range" name="Slider4" min="50" max="100" step="1" id="slider"/> 100</span></p>  
+            <hr>
+            <br>
+            <button class="start">Start</button>
+            <br>
+     </div>
+     </form>
+    <div class="canvasDiv visible">
+    <canvas>
+    </canvas>
+    <div class="info">
+    <div id="upper-ui"></div>
+    <div id="team-options">
+        <div class="teams">
+            <p class="teamA"></p>
+            <p class="teamB"></p>
+        </div>
+        <div id="current-player"></div>
+        <br>
+        <br>
+        <div id="playerText"></div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
